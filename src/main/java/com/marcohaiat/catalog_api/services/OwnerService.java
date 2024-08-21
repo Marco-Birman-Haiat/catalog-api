@@ -2,6 +2,7 @@ package com.marcohaiat.catalog_api.services;
 
 import com.marcohaiat.catalog_api.domain.owner.Owner;
 import com.marcohaiat.catalog_api.domain.owner.OwnerDTO;
+import com.marcohaiat.catalog_api.domain.owner.OwnerNotFoundException;
 import com.marcohaiat.catalog_api.reporitory.OwnerRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +18,9 @@ public class OwnerService {
         Owner newOwner = Owner.toEntity(ownerData);
         ownerRepository.save(newOwner);
         return newOwner;
+    }
+
+    public void checkIfOwnerExists(String ownerId) throws OwnerNotFoundException {
+        ownerRepository.findById(ownerId).orElseThrow(OwnerNotFoundException::new);
     }
 }
