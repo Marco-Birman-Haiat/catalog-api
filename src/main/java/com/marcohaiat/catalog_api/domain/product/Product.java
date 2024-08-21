@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 
-@Document(collation = "products")
+@Document(collection = "products")
 @Getter
 @Setter
 @NoArgsConstructor
