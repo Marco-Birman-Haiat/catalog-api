@@ -13,14 +13,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Category {
     @Id
     private String id;
-    private String name;
+    private String title;
     private String description;
+    private String ownerId;
 
 
     private Category(CategoryDTO categoryDTO) {
         this.id = categoryDTO.id();
-        this.name = categoryDTO.name();
+        this.title = categoryDTO.title();
         this.description = categoryDTO.description();
+        this.ownerId = categoryDTO.ownerId();
     }
 
     public static Category toEntity(CategoryDTO categoryDTO) {
