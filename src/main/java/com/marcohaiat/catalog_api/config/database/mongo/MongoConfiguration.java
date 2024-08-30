@@ -1,5 +1,6 @@
 package com.marcohaiat.catalog_api.config.database.mongo;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
@@ -8,11 +9,12 @@ import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 
 @Configuration
 public class MongoConfiguration {
+    @Value("${mongo.connection.string}")
+    private String connectionString;
 
     @Bean
     public MongoDatabaseFactory mongoConfigure() {
-        String mongoConnectionString = "mongodb://localhost:27017/catalog";
-        return new SimpleMongoClientDatabaseFactory(mongoConnectionString);
+        return new SimpleMongoClientDatabaseFactory(connectionString);
     }
 
     @Bean
