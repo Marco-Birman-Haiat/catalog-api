@@ -2,7 +2,8 @@ package com.marcohaiat.catalog_api.services;
 
 import com.marcohaiat.catalog_api.domain.category.Category;
 import com.marcohaiat.catalog_api.domain.category.CategoryDTO;
-import com.marcohaiat.catalog_api.domain.category.CategoryNotFound;
+import com.marcohaiat.catalog_api.exceptions.ExceptionMessages;
+import com.marcohaiat.catalog_api.exceptions.notFoundExceptions.CategoryNotFoundException;
 import com.marcohaiat.catalog_api.reporitory.category.CategoryRespository;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -36,7 +37,7 @@ public class CategoryService {
     }
 
     public void checkIfCategoryExists(String categoryId) {
-        this.categoryRespository.findById(categoryId).orElseThrow(CategoryNotFound::new);
+        this.categoryRespository.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException(ExceptionMessages.CATEGORY_NOT_FOUND.getMessage()));
     }
 
     public List<Category> getAllCategoriesByOwnerId(String ownerId) {
