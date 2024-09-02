@@ -35,3 +35,4 @@ build/
 
 ### Env Config ###
 *.env-development
+*.env*

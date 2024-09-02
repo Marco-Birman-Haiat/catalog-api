@@ -1,11 +1,9 @@
 package com.marcohaiat.catalog_api.services;
 
-import com.marcohaiat.catalog_api.domain.category.Category;
-import com.marcohaiat.catalog_api.domain.category.CategoryDTO;
 import com.marcohaiat.catalog_api.domain.product.Product;
 import com.marcohaiat.catalog_api.domain.product.ProductDTO;
-import com.marcohaiat.catalog_api.reporitory.CategoryRepository;
-import com.marcohaiat.catalog_api.reporitory.ProductRepository;
+import com.marcohaiat.catalog_api.reporitory.product.MongoProductRepository;
+import com.marcohaiat.catalog_api.reporitory.product.ProductRepository;
 import org.springframework.stereotype.Service;
 
 @Service

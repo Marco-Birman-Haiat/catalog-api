@@ -26,7 +26,7 @@ public class CategoryController {
 
     @GetMapping("/by-owner/{id}")
     public ResponseEntity<List<Category>> getCategoriesByOwner(@PathVariable("id") String ownerId) {
-        List<Category> allOwnerCategories = this.categoryService.getAllCategoriesByOwnerId2(ownerId);
+        List<Category> allOwnerCategories = this.categoryService.getAllCategoriesByOwnerId(ownerId);
         return ResponseEntity.ok(allOwnerCategories);
     }
 }
