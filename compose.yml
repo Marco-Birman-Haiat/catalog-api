@@ -1,0 +1,26 @@
+services:
+  catalog-api:
+    build: .
+    depends_on:
+      - mongo
+    ports:
+      - 8080:8080
+    env_file:
+      - .env-docker
+    networks:
+      - app-network
+
+
+  mongo:
+    image: mongo
+    container_name: catalog-mongo-db
+    networks:
+      - app-network
+    ports:
+      - "27018:27017"
+
+networks:
+  app-network:
+    driver: bridge
+
+
