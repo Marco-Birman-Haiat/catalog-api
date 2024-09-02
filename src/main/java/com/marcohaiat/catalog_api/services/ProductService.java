@@ -2,9 +2,10 @@ package com.marcohaiat.catalog_api.services;
 
 import com.marcohaiat.catalog_api.domain.product.Product;
 import com.marcohaiat.catalog_api.domain.product.ProductDTO;
-import com.marcohaiat.catalog_api.reporitory.product.MongoProductRepository;
 import com.marcohaiat.catalog_api.reporitory.product.ProductRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -31,5 +32,9 @@ public class ProductService {
         this.productRepository.save(newProduct);
         snsService.publish(newProduct.getOwnerId());
         return newProduct;
+    }
+
+    public List<Product> findAll() {
+        return this.productRepository.findAll();
     }
 }

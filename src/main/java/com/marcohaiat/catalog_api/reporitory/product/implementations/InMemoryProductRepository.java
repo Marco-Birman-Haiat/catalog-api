@@ -1,6 +1,8 @@
-package com.marcohaiat.catalog_api.reporitory.product;
+package com.marcohaiat.catalog_api.reporitory.product.implementations;
 
 import com.marcohaiat.catalog_api.domain.product.Product;
+import com.marcohaiat.catalog_api.reporitory.category.implementations.InMemoryCategoryRepository;
+import com.marcohaiat.catalog_api.reporitory.product.ProductRepository;
 import com.marcohaiat.catalog_api.utils.idGenerator.CounterIdGenerator;
 import com.marcohaiat.catalog_api.utils.idGenerator.IdGenerator;
 
@@ -28,6 +30,11 @@ public class InMemoryProductRepository implements ProductRepository {
         return memory.stream()
                 .filter(product -> product.getId().equals(productId))
                 .findFirst();
+    }
+
+    @Override
+    public List<Product> findAll() {
+        return InMemoryProductRepository.memory;
     }
 
     private void update(Product productData) {

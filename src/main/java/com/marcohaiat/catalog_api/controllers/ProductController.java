@@ -7,11 +7,11 @@ import com.marcohaiat.catalog_api.domain.product.ProductDTO;
 import com.marcohaiat.catalog_api.services.CategoryService;
 import com.marcohaiat.catalog_api.services.ProductService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/product")
@@ -27,5 +27,10 @@ public class ProductController {
     public ResponseEntity<Product> insert(@RequestBody ProductDTO productData) {
         Product newProduct = this.productService.insert(productData);
         return ResponseEntity.ok(newProduct);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Product>> findAll() {
+        return new ResponseEntity<List<Product>>(this.productService.findAll(), HttpStatus.OK);
     }
 }

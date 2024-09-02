@@ -38,6 +38,11 @@ public class InMemoryCategoryRepository implements CategoryRespository {
                 .toList();
     }
 
+    @Override
+    public List<Category> findAll() {
+        return InMemoryCategoryRepository.memory;
+    }
+
     private void update(Category category) {
         Category foundCategory = findById(category.getId()).get();
         foundCategory = category;

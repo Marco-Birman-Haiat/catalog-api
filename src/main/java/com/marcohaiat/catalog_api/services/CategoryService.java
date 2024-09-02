@@ -4,7 +4,6 @@ import com.marcohaiat.catalog_api.domain.category.Category;
 import com.marcohaiat.catalog_api.domain.category.CategoryDTO;
 import com.marcohaiat.catalog_api.domain.category.CategoryNotFound;
 import com.marcohaiat.catalog_api.reporitory.category.CategoryRespository;
-import com.marcohaiat.catalog_api.reporitory.category.implementations.MongoCategoryRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 @Service
 public class CategoryService {
@@ -48,5 +46,9 @@ public class CategoryService {
     public List<Category> getAllCategoriesByOwnerId4(String ownerId) {
         Query query = new Query().addCriteria(Criteria.where("ownerId").is(ownerId));
         return mongoTemplate.find(query, Category.class);
+    }
+
+    public List<Category> findAll() {
+        return this.categoryRespository.findAll();
     }
 }

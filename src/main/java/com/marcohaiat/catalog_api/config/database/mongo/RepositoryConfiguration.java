@@ -4,7 +4,7 @@ import com.marcohaiat.catalog_api.reporitory.category.CategoryRespository;
 import com.marcohaiat.catalog_api.reporitory.category.implementations.InMemoryCategoryRepository;
 import com.marcohaiat.catalog_api.reporitory.owner.OwnerRepository;
 import com.marcohaiat.catalog_api.reporitory.owner.implementations.InMemoryOwnerRepository;
-import com.marcohaiat.catalog_api.reporitory.product.InMemoryProductRepository;
+import com.marcohaiat.catalog_api.reporitory.product.implementations.InMemoryProductRepository;
 import com.marcohaiat.catalog_api.reporitory.product.ProductRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

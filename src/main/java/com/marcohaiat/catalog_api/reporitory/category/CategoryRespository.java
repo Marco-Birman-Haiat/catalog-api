@@ -9,4 +9,5 @@ public interface CategoryRespository {
     Category save(Category category);
     Optional<Category> findById(String id);
     List<Category> getAllByOwnerId(String ownerId);
+    List<Category> findAll();
 }

@@ -3,6 +3,7 @@ package com.marcohaiat.catalog_api.controllers;
 import com.marcohaiat.catalog_api.domain.category.Category;
 import com.marcohaiat.catalog_api.domain.category.CategoryDTO;
 import com.marcohaiat.catalog_api.services.CategoryService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,5 +29,10 @@ public class CategoryController {
     public ResponseEntity<List<Category>> getCategoriesByOwner(@PathVariable("id") String ownerId) {
         List<Category> allOwnerCategories = this.categoryService.getAllCategoriesByOwnerId(ownerId);
         return ResponseEntity.ok(allOwnerCategories);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<Category>> findAll() {
+        return new ResponseEntity<List<Category>>(categoryService.findAll(), HttpStatus.OK);
     }
 }

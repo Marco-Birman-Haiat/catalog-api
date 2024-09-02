@@ -5,10 +5,9 @@ import com.marcohaiat.catalog_api.domain.owner.OwnerDTO;
 import com.marcohaiat.catalog_api.services.OwnerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/owner")
@@ -23,5 +22,10 @@ public class OwnerController {
     public ResponseEntity<Owner> insert(@RequestBody OwnerDTO ownerData) {
         Owner newOwner = this.ownerService.insert(ownerData);
         return new ResponseEntity<Owner>(newOwner, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Owner>> findAll() {
+        return new ResponseEntity<List<Owner>>(this.ownerService.findAll(), HttpStatus.OK);
     }
 }

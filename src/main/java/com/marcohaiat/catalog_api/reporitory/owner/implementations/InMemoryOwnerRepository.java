@@ -31,6 +31,11 @@ public class InMemoryOwnerRepository implements OwnerRepository {
                 .findFirst();
     }
 
+    @Override
+    public List<Owner> findAll() {
+        return InMemoryOwnerRepository.memory;
+    }
+
     private void update(Owner ownerData) {
         Owner foundOwner = findById(ownerData.getId()).get();
         foundOwner = ownerData;
