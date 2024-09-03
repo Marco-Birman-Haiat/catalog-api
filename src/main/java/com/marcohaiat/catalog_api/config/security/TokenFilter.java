@@ -41,6 +41,4 @@ public class TokenFilter extends OncePerRequestFilter {
         if(authHeader == null) return null;
         return authHeader.replace("Bearer ", "");
     }
-
-    private boolean verifyUserMatch()
 }
