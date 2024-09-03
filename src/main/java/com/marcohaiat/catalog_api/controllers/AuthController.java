@@ -5,6 +5,7 @@ import com.marcohaiat.catalog_api.domain.user.LoginResponseDTO;
 import com.marcohaiat.catalog_api.domain.user.RegisterDTO;
 import com.marcohaiat.catalog_api.domain.user.User;
 import com.marcohaiat.catalog_api.reporitory.user.UserRepository;
+import com.marcohaiat.catalog_api.services.security.AuthService;
 import com.marcohaiat.catalog_api.services.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,25 +26,19 @@ public class AuthController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private AuthService authService;
+    @Autowired
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AuthenticationDTO data) {
-        var userNamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
-        var auth = this.authenticationManager.authenticate(userNamePassword);
-        var token = tokenService.generateToken((User) auth.getPrincipal());
-
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AuthenticationDTO authData) {
+        String token = this.authService.authenticateUser(authData);
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
-        if (this.userRepository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
-
-        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User newUser = new User(data.login(), encryptedPassword, data.role());
-        this.userRepository.save(newUser);
-
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> register(@RequestBody @Valid RegisterDTO registerData) {
+        this.authService.register(registerData);
+        return ResponseEntity.ok("user created");
     }
 }

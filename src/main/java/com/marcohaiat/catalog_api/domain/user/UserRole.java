@@ -2,6 +2,7 @@ package com.marcohaiat.catalog_api.domain.user;
 
 public enum UserRole {
     ADMIN("admin"),
+    ANALYST("analyst"),
     USER("user");
 
     private String role;
