@@ -1,7 +1,6 @@
-package com.marcohaiat.catalog_api.services;
+package com.marcohaiat.catalog_api.services.security;
 
 import com.marcohaiat.catalog_api.reporitory.user.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
