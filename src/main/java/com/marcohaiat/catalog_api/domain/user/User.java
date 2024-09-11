@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -38,7 +39,7 @@ public class User implements UserDetails {
                     new SimpleGrantedAuthority("ROLE_ADMIN"),
                     new SimpleGrantedAuthority("ROLE_USER"),
                     new SimpleGrantedAuthority("ROLE_ANALYST"));
-        } else if (this.role == UserRole.ANALYST) {
+        } else if (Objects.equals(this.role.getRole(), UserRole.ANALYST.getRole())) {
             return List.of(
                     new SimpleGrantedAuthority("ROLE_USER"),
                     new SimpleGrantedAuthority("ROLE_ANALYST"));

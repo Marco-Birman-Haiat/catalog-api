@@ -10,18 +10,16 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @Slf4j
-@ConditionalOnProperty(name = "spring.security.switch", havingValue = "true")
-public class SecurityConfig {
+@ConditionalOnProperty(name = "spring.security.switch", havingValue = "false")
+public class SecurityConfigOff {
     @Autowired
     private TokenFilter tokenFilter;
 
@@ -30,8 +28,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        log.info("APPLICATION LOG --> Spring Security Enabled");
-        return getSecurityFilterEnabled(httpSecurity);
+        log.info("APPLICATION LOG --> Spring Security Disabled");
+        return getSecurityFilterDisabled(httpSecurity);
     }
 
     @Bean
@@ -44,17 +42,10 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    private SecurityFilterChain getSecurityFilterEnabled(HttpSecurity httpSecurity) throws Exception {
+    private SecurityFilterChain getSecurityFilterDisabled(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/auth/login").permitAll()
-                        .requestMatchers("/api/auth/register").permitAll()
-                        .requestMatchers("/api/owner/all").hasRole("ANALYST")
-                        .anyRequest().authenticated()
-                )
-                .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }
