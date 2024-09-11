@@ -16,17 +16,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService implements UserDetailsService {
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
     private TokenService tokenService;
     @Autowired
     private PasswordEncrypter passwordEncrypter;
-
-    public AuthService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
