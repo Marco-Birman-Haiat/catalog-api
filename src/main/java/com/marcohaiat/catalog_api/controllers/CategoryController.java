@@ -31,7 +31,7 @@ public class CategoryController {
         return ResponseEntity.ok(allOwnerCategories);
     }
 
-    @GetMapping()
+    @GetMapping("/all")
     public ResponseEntity<List<Category>> findAll() {
         return new ResponseEntity<List<Category>>(categoryService.findAll(), HttpStatus.OK);
     }

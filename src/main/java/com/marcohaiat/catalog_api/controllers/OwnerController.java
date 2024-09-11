@@ -24,7 +24,7 @@ public class OwnerController {
         return new ResponseEntity<Owner>(newOwner, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Owner>> findAll() {
         return new ResponseEntity<List<Owner>>(this.ownerService.findAll(), HttpStatus.OK);
     }
